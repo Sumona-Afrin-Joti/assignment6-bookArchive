@@ -45,22 +45,26 @@ const displaySearchItem = (data) => {
 
     // displaying data
     data.forEach(n => {
-        if (`${n.ebook_count_i}` == 0) {
-            return;
-        }
-        const div = document.createElement('div');
-        div.classList.add("col")
-        div.innerHTML = `<div class="card border-0" style="width: 18rem;">
-        <img src="https://covers.openlibrary.org/b/id/${n.cover_i}-M.jpg" class="card-img-top img-fluid" alt="...">
-        <div class="card-body bg-light ">
-          <p class="card-title"> Title: ${n.title}</p>
-          <p class="card-text"> Author: ${n.author_name[0]}</p>
-          <p class="card-text">First Published Date: ${n.first_publish_year}</p>
-          <p class="card-text">Edition: ${n.edition_count}</p>
-        </div>
-      </div>`
+        try {
+            const div = document.createElement('div');
+            div.classList.add("col")
+            div.innerHTML = `<div class="card border-0" style="width: 18rem;">
+            <img src="https://covers.openlibrary.org/b/id/${n.cover_i}-M.jpg" class="card-img-top img-fluid" alt="...">
+            <div class="card-body bg-light ">
+              <p class="card-title"> Title: ${n.title}</p>
+              <p class="card-text"> Author: ${n?.author_name[0]}</p>
+              <p class="card-text"> Publisher: ${n?.publisher[0]}</p>
+              <p class="card-text">First Published Year: ${n.first_publish_year}</p>
+              <p class="card-text">Edition: ${n.edition_count}</p>
+            </div>
+          </div>`
+            container.appendChild(div);
 
-        container.appendChild(div);
+        } catch (e) {
+            return e;
+        }
+
+
     })
 
 }
