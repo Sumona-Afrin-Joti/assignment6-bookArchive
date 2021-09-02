@@ -32,40 +32,29 @@ const loadSearchedData = async () => {
     else {
         searchResult.innerText = ` About ${data.numFound} results`;
     }
-    console.log(data);
-    console.log(data.docs);
     //calling display function
     displaySearchItem(data.docs);
 }
 
 const displaySearchItem = (data) => {
-
     // removing spinner after loading data;
     spinner.classList.add('d-none');
 
     // displaying data
     data.forEach(n => {
-
-            try {
-                const div = document.createElement('div');
-                div.classList.add("col")
-                div.innerHTML = `<div class="card border-0" style="width: 18rem;">
+        
+            const div = document.createElement('div');
+            div.classList.add("col")
+             div.innerHTML = `<div class="card border-0" style="width: 18rem;">
                 <img src="https://covers.openlibrary.org/b/id/${n.cover_i}-M.jpg" class="card-img-top img-fluid" alt="...">
                 <div class="card-body bg-light ">
                   <p class="card-title"> Title: ${n.title}</p>
-                  <p class="card-text"> Author: ${n?.author_name[0]}</p>
-                  <p class="card-text"> Publisher: ${n?.publisher[0]}</p>
-                  <p class="card-text">First Published Year: ${n.first_publish_year}</p>
+                  <p class="card-text"> Author: ${n.author_name?.[0] ? n.author_name[0] : "Not found"}</p>
+                  <p class="card-text"> Publisher: ${n.publisher?.[0] ? n.publisher[0] : "Not found" }</p>
+                  <p class="card-text">First Published Year: ${n.first_publish_year ?n.first_publish_year:"Not found"}</p>
                   <p class="card-text">Edition: ${n.edition_count}</p>
                 </div>
               </div>`
-                container.appendChild(div);
-    
-            } catch (e) {
-                return e;
-            }
+            container.appendChild(div);
     })
-    const totalData = parseInt(`${data.length}` );
-    const totalResult = parseInt(container.childElementCount);
-    console.log(totalResult,totalData);
 }
