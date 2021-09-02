@@ -45,26 +45,27 @@ const displaySearchItem = (data) => {
 
     // displaying data
     data.forEach(n => {
-        try {
-            const div = document.createElement('div');
-            div.classList.add("col")
-            div.innerHTML = `<div class="card border-0" style="width: 18rem;">
-            <img src="https://covers.openlibrary.org/b/id/${n.cover_i}-M.jpg" class="card-img-top img-fluid" alt="...">
-            <div class="card-body bg-light ">
-              <p class="card-title"> Title: ${n.title}</p>
-              <p class="card-text"> Author: ${n?.author_name[0]}</p>
-              <p class="card-text"> Publisher: ${n?.publisher[0]}</p>
-              <p class="card-text">First Published Year: ${n.first_publish_year}</p>
-              <p class="card-text">Edition: ${n.edition_count}</p>
-            </div>
-          </div>`
-            container.appendChild(div);
 
-        } catch (e) {
-            return e;
-        }
-
-
+            try {
+                const div = document.createElement('div');
+                div.classList.add("col")
+                div.innerHTML = `<div class="card border-0" style="width: 18rem;">
+                <img src="https://covers.openlibrary.org/b/id/${n.cover_i}-M.jpg" class="card-img-top img-fluid" alt="...">
+                <div class="card-body bg-light ">
+                  <p class="card-title"> Title: ${n.title}</p>
+                  <p class="card-text"> Author: ${n?.author_name[0]}</p>
+                  <p class="card-text"> Publisher: ${n?.publisher[0]}</p>
+                  <p class="card-text">First Published Year: ${n.first_publish_year}</p>
+                  <p class="card-text">Edition: ${n.edition_count}</p>
+                </div>
+              </div>`
+                container.appendChild(div);
+    
+            } catch (e) {
+                return e;
+            }
     })
-
+    const totalData = parseInt(`${data.length}` );
+    const totalResult = parseInt(container.childElementCount);
+    console.log(totalResult,totalData);
 }
